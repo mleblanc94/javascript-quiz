@@ -77,3 +77,11 @@ button:hover {
     height: 20px;
     margin: 5px;
 }
+
+#go-back-button, #clear-scores-button {
+    display: none;
+}
+
+#highscore-viewing {
+    display: none;
+}
