@@ -1,6 +1,6 @@
 let mainArea = document.querySelector('#main-area');
 let mainHeader = document.querySelector('#main-header');
-let answerButtons = document.querySelector('.answer-buttons')
+let answerButtons = document.querySelector('.answer-buttons');
 let quizStartButton = document.querySelector('#startQuizButton');
 let mainParagraph = document.querySelector('#main-paragraph');
 let answerSection = document.querySelector('#answer-buttons-section');
@@ -11,10 +11,16 @@ let button2 = document.querySelector(".button2");
 let button3 = document.querySelector(".button3");
 let button4 = document.querySelector(".button4");
 let hsSubmissionArea = document.querySelector("#highscore-submission");
+let highscoreInput = document.querySelector("#highscore-input");
+let highscoreButton = document.querySelector("#highscore-button");
+let highscores = document.querySelector("#highscores");
+let highscoreInitialsReturn = document.querySelector("#highscore-initials-return");
+let highscoreScoreReturn = document.querySelector("#highscore-score-return");
+let goBackButton = document.querySelector("#go-back-button");
+let clearScoresButton = document.querySelector("#clear-scores-button");
 let timeleft = 75;
 
 function startQuiz() {
-    // let timeleft = 75;
     let countdownTimer = setInterval(function(){
       if(timeleft <= 0){
         clearInterval(countdownTimer);
@@ -225,4 +231,28 @@ function hsAfterInCorrect() {
     mainParagraph.innerHTML = "Your final score is " + timeleft;
 }
 
+function submitHighscore() {
+    //Store items in local storage
+    let initials = highscoreInput.value;
+    localStorage.setItem('initials', initials);
+    localStorage.setItem('score', timeleft);
+
+    //Retrieve items from local storage
+    let returnInitials = localStorage.getItem('initials');
+    let returnScores = localStorage.getItem('score');
+
+    console.log(returnInitials, returnScores);
+
+    //Change UI
+    mainHeader.innerHTML = "High scores";
+    hsSubmissionArea.style.display = "none";
+    mainParagraph.style.display = "none";
+    rightOrWrong.innerHTML = "";
+    goBackButton.style.display = "inline";
+    clearScoresButton.style.display = "inline";
+    highscoreInitialsReturn.innerHTML = returnInitials;
+    highscoreScoreReturn.innerHTML = returnScores;
+}
+
+highscoreButton.addEventListener("click", submitHighscore)
 quizStartButton.addEventListener("click", startQuiz)
