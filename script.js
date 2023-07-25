@@ -250,6 +250,7 @@ function submitHighscore() {
     rightOrWrong.innerHTML = "";
     goBackButton.style.display = "inline";
     clearScoresButton.style.display = "inline";
+    highscores.style.display = "inline";
     highscoreInitialsReturn.innerHTML = returnInitials;
     highscoreScoreReturn.innerHTML = returnScores;
 }
