@@ -21,6 +21,7 @@ main {
 
 #main-area {
     width: 50%;
+    padding-bottom: 20px;
 }
 
 #view-high-scores {
@@ -28,8 +29,26 @@ main {
 
 }
 
-button {
+#answer-buttons-section {
+    float: left;
+    display: none;
+}
+
+.answer-buttons {
+    background-color: #330066;
+    color: white;
+    padding: 5px 25px 5px 0px;
+    margin: 5px;
+    width: 150px;
+    height: 30px;
+    border-radius: 5px;
+}
+
+#startQuizButton { 
     padding: 5px 20px;
+}
+
+button {
     background-color:  #330066;
     color: white;
     border-color:  #330066;
@@ -38,4 +57,8 @@ button {
 button:hover {
     cursor: pointer;
     background-color: #ff33cc;
+}
+
+.right-or-wrong {
+    display: none;
 }
