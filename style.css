@@ -62,3 +62,7 @@ button:hover {
 .right-or-wrong {
     display: none;
 }
+
+#highscore-submission {
+    display: none;
+}

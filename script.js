@@ -10,6 +10,7 @@ let button1 = document.querySelector(".button1");
 let button2 = document.querySelector(".button2");
 let button3 = document.querySelector(".button3");
 let button4 = document.querySelector(".button4");
+let hsSubmissionArea = document.querySelector("#highscore-submission");
 let timeleft = 75;
 
 function startQuiz() {
@@ -54,6 +55,11 @@ function correctAnswer1() {
     button3.innerHTML = "3. Parenthesis";
     button4.innerHTML = "4. Square Brackets";
 
+button1.removeEventListener("click", wrongAnswer1);
+button2.removeEventListener("click", wrongAnswer1);
+button3.removeEventListener("click", correctAnswer1);
+button4.removeEventListener("click", wrongAnswer1);
+
 button1.addEventListener("click", wrongAnswer2);
 button2.addEventListener("click", wrongAnswer2);
 button3.addEventListener("click", correctAnswer2);
@@ -67,6 +73,11 @@ function correctAnswer2() {
     button2.innerHTML = "2. Other Arrays";
     button3.innerHTML = "3. Booleans";
     button4.innerHTML = "4. All of the above";
+
+    button1.removeEventListener("click", wrongAnswer2);
+    button2.removeEventListener("click", wrongAnswer2);
+    button3.removeEventListener("click", correctAnswer2);
+    button4.removeEventListener("click", wrongAnswer2);
     
     button1.addEventListener("click", wrongAnswer3);
     button2.addEventListener("click", wrongAnswer3);
@@ -81,6 +92,11 @@ function correctAnswer3() {
     button2.innerHTML = "2. Curley Brackets";
     button3.innerHTML = "3. Quotes";
     button4.innerHTML = "4. Parenthesis";
+
+    button1.removeEventListener("click", wrongAnswer3);
+    button2.removeEventListener("click", wrongAnswer3);
+    button3.removeEventListener("click", wrongAnswer3);
+    button4.removeEventListener("click", correctAnswer3);
     
     button1.addEventListener("click", wrongAnswer4);
     button2.addEventListener("click", wrongAnswer4);
@@ -95,6 +111,16 @@ function correctAnswer4() {
     button2.innerHTML = "2. Terminal/Bash";
     button3.innerHTML = "3. For loops";
     button4.innerHTML = "4. console.log";
+
+    button1.removeEventListener("click", wrongAnswer4);
+    button2.removeEventListener("click", wrongAnswer4);
+    button3.removeEventListener("click", correctAnswer4);
+    button4.removeEventListener("click", wrongAnswer4);
+    
+    button1.addEventListener("click", hsAfterInCorrect);
+    button2.addEventListener("click", hsAfterInCorrect);
+    button3.addEventListener("click", hsAfterInCorrect);
+    button4.addEventListener("click", hsAfterCorrect);
     }
 
 //Wrong answers
@@ -108,6 +134,11 @@ function wrongAnswer1() {
     button2.innerHTML = "2. Curly Brackets";
     button3.innerHTML = "3. Parenthesis";
     button4.innerHTML = "4. Square Brackets";
+
+    button1.removeEventListener("click", wrongAnswer1);
+    button2.removeEventListener("click", wrongAnswer1);
+    button3.removeEventListener("click", correctAnswer1);
+    button4.removeEventListener("click", wrongAnswer1);
 
     button1.addEventListener("click", wrongAnswer2);
     button2.addEventListener("click", wrongAnswer2);
@@ -123,6 +154,11 @@ function wrongAnswer2() {
     button2.innerHTML = "2. Other Arrays";
     button3.innerHTML = "3. Booleans";
     button4.innerHTML = "4. All of the above";
+
+    button1.removeEventListener("click", wrongAnswer2);
+    button2.removeEventListener("click", wrongAnswer2);
+    button3.removeEventListener("click", correctAnswer2);
+    button4.removeEventListener("click", wrongAnswer2);
     
     button1.addEventListener("click", wrongAnswer3);
     button2.addEventListener("click", wrongAnswer3);
@@ -138,11 +174,16 @@ function wrongAnswer3() {
     button2.innerHTML = "2. Other Arrays";
     button3.innerHTML = "3. Booleans";
     button4.innerHTML = "4. All of the above";
+
+    button1.removeEventListener("click", wrongAnswer3);
+    button2.removeEventListener("click", wrongAnswer3);
+    button3.removeEventListener("click", wrongAnswer3);
+    button4.removeEventListener("click", correctAnswer3);
     
-    button1.addEventListener("click", wrongAnswer3);
-    button2.addEventListener("click", wrongAnswer3);
-    button3.addEventListener("click", correctAnswer3);
-    button4.addEventListener("click", wrongAnswer3);
+    button1.addEventListener("click", wrongAnswer4);
+    button2.addEventListener("click", wrongAnswer4);
+    button3.addEventListener("click", wrongAnswer4);
+    button4.addEventListener("click", correctAnswer4);
 }
 
 function wrongAnswer4() {
@@ -153,11 +194,35 @@ function wrongAnswer4() {
     button2.innerHTML = "2. Terminal/Bash";
     button3.innerHTML = "3. For loops";
     button4.innerHTML = "4. console.log";
+
+    button1.removeEventListener("click", wrongAnswer4);
+    button2.removeEventListener("click", wrongAnswer4);
+    button3.removeEventListener("click", wrongAnswer4);
+    button4.removeEventListener("click", correctAnswer4);
     
-    button1.addEventListener("click", wrongAnswer3);
-    button2.addEventListener("click", wrongAnswer3);
-    button3.addEventListener("click", correctAnswer3);
-    button4.addEventListener("click", wrongAnswer3);
+    button1.addEventListener("click", hsAfterInCorrect);
+    button2.addEventListener("click", hsAfterInCorrect);
+    button3.addEventListener("click", hsAfterInCorrect);
+    button4.addEventListener("click", hsAfterCorrect);
+}
+
+//Show high score submission screen after correct or incorrect final answer
+function hsAfterCorrect() {
+    rightOrWrong.innerHTML = "Correct!";
+    mainHeader.innerHTML = "All done!";
+    hsSubmissionArea.style.display = "flex";
+    answerSection.style.display = "none";
+    mainParagraph.style.display = "block";
+    mainParagraph.innerHTML = "Your final score is " + timeleft;
+}
+
+function hsAfterInCorrect() {
+    rightOrWrong.innerHTML = "Wrong!";
+    mainHeader.innerHTML = "All done!";
+    hsSubmissionArea.style.display = "flex";
+    answerSection.style.display = "none";
+    mainParagraph.style.display = "block";
+    mainParagraph.innerHTML = "Your final score is " + timeleft;
 }
 
 quizStartButton.addEventListener("click", startQuiz)
