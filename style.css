@@ -65,4 +65,15 @@ button:hover {
 
 #highscore-submission {
     display: none;
+    align-items: center;
+    justify-content: center;
+}
+
+#highscore-p {
+    margin: 5px;
+}
+
+#highscore-input {
+    height: 20px;
+    margin: 5px;
 }
