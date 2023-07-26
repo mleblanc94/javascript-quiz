@@ -20,14 +20,17 @@ let goBackButton = document.querySelector("#go-back-button");
 let clearScoresButton = document.querySelector("#clear-scores-button");
 let timeleft = 75;
 
+let countdownTimer;
+
 function startQuiz() {
-    let countdownTimer = setInterval(function(){
-      if(timeleft <= 0){
-        clearInterval(countdownTimer);
-      }
-      timer.innerHTML = timeleft;
-      timeleft -= 1;
-    }, 1000);
+
+    countdownTimer = setInterval(function(){
+        if(timeleft <= 0){
+          clearInterval(countdownTimer);
+        }
+        timer.innerHTML = timeleft;
+        timeleft -= 1;
+      }, 1000);
 
 //Question 1
 mainArea.style.width = '40%';
@@ -47,6 +50,8 @@ button2.addEventListener("click", wrongAnswer1);
 button3.addEventListener("click", correctAnswer1);
 button4.addEventListener("click", wrongAnswer1);
 }
+
+let questions = []
 
 
 //Wrong or correct answer functions
@@ -134,7 +139,9 @@ function wrongAnswer1() {
     rightOrWrong.style.display = "block";
     rightOrWrong.innerHTML = "Wrong!";
     mainArea.style.borderBottom = "1px black solid";
-    timeleft -= 20;
+    if (timeleft > 10 ) {
+    timeleft -= 10;
+    }
     mainHeader.innerHTML = "The condition in an if / else statement is enclosed with ____:";
     button1.innerHTML = "1. Quotes";
     button2.innerHTML = "2. Curly Brackets";
@@ -154,7 +161,9 @@ function wrongAnswer1() {
 
 function wrongAnswer2() {
     rightOrWrong.innerHTML = "Wrong!"
-    timeleft -= 20;
+    if (timeleft > 10 ) {
+        timeleft -= 10;
+        }
     mainHeader.innerHTML = "Arrays in Javascript can be used to store ____";
     button1.innerHTML = "1. Numbers and Strings";
     button2.innerHTML = "2. Other Arrays";
@@ -174,12 +183,14 @@ function wrongAnswer2() {
 
 function wrongAnswer3() {
     rightOrWrong.innerHTML = "Wrong!";
-    timeleft -= 20;
-    mainHeader.innerHTML = "Arrays in Javascript can be used to store ____";
-    button1.innerHTML = "1. Numbers and Strings";
-    button2.innerHTML = "2. Other Arrays";
-    button3.innerHTML = "3. Booleans";
-    button4.innerHTML = "4. All of the above";
+    if (timeleft > 10 ) {
+        timeleft -= 10;
+        }
+    mainHeader.innerHTML = "String values must be enclosed within _____ when being assigned to variables.";
+    button1.innerHTML = "1. Commas";
+    button2.innerHTML = "2. Curley Brackets";
+    button3.innerHTML = "3. Quotes";
+    button4.innerHTML = "4. Parenthesis";
 
     button1.removeEventListener("click", wrongAnswer3);
     button2.removeEventListener("click", wrongAnswer3);
@@ -194,7 +205,9 @@ function wrongAnswer3() {
 
 function wrongAnswer4() {
     rightOrWrong.innerHTML = "Wrong!";
-    timeleft -= 20;
+    if (timeleft > 10 ) {
+        timeleft -= 10;
+        }
     mainHeader.innerHTML = "A very useful tool used during development and debugging for printing content to the debugger is:";
     button1.innerHTML = "1. Javascript";
     button2.innerHTML = "2. Terminal/Bash";
@@ -220,15 +233,22 @@ function hsAfterCorrect() {
     answerSection.style.display = "none";
     mainParagraph.style.display = "block";
     mainParagraph.innerHTML = "Your final score is " + timeleft;
+    clearInterval(countdownTimer);
+    timer.innerHTML = timeleft;
 }
 
 function hsAfterInCorrect() {
     rightOrWrong.innerHTML = "Wrong!";
+    if (timeleft > 10 ) {
+        timeleft -= 10;
+        }
     mainHeader.innerHTML = "All done!";
     hsSubmissionArea.style.display = "flex";
     answerSection.style.display = "none";
     mainParagraph.style.display = "block";
     mainParagraph.innerHTML = "Your final score is " + timeleft;
+    clearInterval(countdownTimer);
+    timer.innerHTML = timeleft;
 }
 
 function submitHighscore() {
@@ -250,7 +270,7 @@ function submitHighscore() {
     rightOrWrong.innerHTML = "";
     goBackButton.style.display = "inline";
     clearScoresButton.style.display = "inline";
-    highscores.style.display = "inline";
+    highscores.style.display = "flex";
     highscoreInitialsReturn.innerHTML = returnInitials;
     highscoreScoreReturn.innerHTML = returnScores;
 }
