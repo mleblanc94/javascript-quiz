@@ -277,3 +277,11 @@ function submitHighscore() {
 
 highscoreButton.addEventListener("click", submitHighscore)
 quizStartButton.addEventListener("click", startQuiz)
+goBackButton.addEventListener("click", function() {
+    location.reload()
+});
+clearScoresButton.addEventListener("click", function() {
+    localStorage.clear();
+    highscoreInitialsReturn.innerHTML = returnInitials;
+    highscoreScoreReturn.innerHTML = returnScores;
+})
