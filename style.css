@@ -39,8 +39,8 @@ main {
     color: white;
     padding: 5px 25px 5px 0px;
     margin: 5px;
-    width: 150px;
-    height: 30px;
+    width: 200px;
+    height: 40px;
     border-radius: 5px;
 }
 
@@ -84,4 +84,12 @@ button:hover {
 
 #highscores {
     display: none;
+    justify-content: space-around;
+    background-color: gray;
+    color: blue;
+    font-size: 300%;
+}
+
+#highscore-initials-return, #highscore-score-return {
+    margin: 0;
 }
