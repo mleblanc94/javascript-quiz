@@ -19,6 +19,7 @@ let highscoreScoreReturn = document.querySelector("#highscore-score-return");
 let goBackButton = document.querySelector("#go-back-button");
 let clearScoresButton = document.querySelector("#clear-scores-button");
 let viewHighScores = document.querySelector("#view-high-scores");
+let time = document.querySelector("#time");
 let timeleft = 75;
 
 let countdownTimer;
@@ -294,6 +295,8 @@ function submitHighscore() {
     goBackButton.style.display = "inline";
     clearScoresButton.style.display = "inline";
     highscores.style.display = "flex";
+    viewHighScores.style.display = "none";
+    time.style.display = "none";
 }
 
 function viewingHighScores() {
@@ -308,6 +311,8 @@ function viewingHighScores() {
     answerSection.style.display = "none";
     clearInterval(countdownTimer);
     timer.innerHTML = "";
+    viewHighScores.style.display = "none";
+    time.style.display = "none";
 
     let storedUserData = localStorage.getItem('scores');
     let stringUserData = JSON.parse(storedUserData);
