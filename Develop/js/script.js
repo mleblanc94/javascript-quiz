@@ -29,6 +29,7 @@ function startQuiz() {
     countdownTimer = setInterval(function(){
         if(timeleft <= 0){
           clearInterval(countdownTimer);
+          hsAfterInCorrect()
         }
         timer.innerHTML = timeleft;
         timeleft -= 1;
