@@ -18,6 +18,7 @@ let highscoreInitialsReturn = document.querySelector("#highscore-initials-return
 let highscoreScoreReturn = document.querySelector("#highscore-score-return");
 let goBackButton = document.querySelector("#go-back-button");
 let clearScoresButton = document.querySelector("#clear-scores-button");
+let viewHighScores = document.querySelector("#view-high-scores");
 let timeleft = 75;
 
 let countdownTimer;
@@ -252,16 +253,38 @@ function hsAfterInCorrect() {
 }
 
 function submitHighscore() {
-    //Store items in local storage
-    let initials = highscoreInput.value;
-    localStorage.setItem('initials', initials);
-    localStorage.setItem('score', timeleft);
+
+    if (localStorage.length === 0) {
+        let storedScores = {};
+        let initials = highscoreInput.value;
+        storedScores[initials] = timeleft;
+        let scoresString = JSON.stringify(storedScores);
+        localStorage.setItem('scores', scoresString);
+    } else {
+        let storedScoresString = localStorage.getItem('scores');
+        let storedUserScores = JSON.parse(storedScoresString);
+        let initials = highscoreInput.value;
+        storedUserScores[initials] = timeleft;
+        scoresString = JSON.stringify(storedUserScores);
+        localStorage.setItem('scores', scoresString);
+    }
 
     //Retrieve items from local storage
-    let returnInitials = localStorage.getItem('initials');
-    let returnScores = localStorage.getItem('score');
+    let storedUserData = localStorage.getItem('scores');
+    let stringUserData = JSON.parse(storedUserData);
+    let highscoreReturn = Object.entries(stringUserData);
 
-    console.log(returnInitials, returnScores);
+    for (const [initials, scores] of highscoreReturn) {
+        const initial = document.createElement("h5");
+        const initialNode = document.createTextNode(initials);
+        initial.appendChild(initialNode);
+        highscoreInitialsReturn.appendChild(initial);
+
+        const score = document.createElement("h5");
+        const scoreNode = document.createTextNode(scores);
+        score.appendChild(scoreNode);
+        highscoreScoreReturn.appendChild(score);
+    }
 
     //Change UI
     mainHeader.innerHTML = "High scores";
@@ -271,8 +294,36 @@ function submitHighscore() {
     goBackButton.style.display = "inline";
     clearScoresButton.style.display = "inline";
     highscores.style.display = "flex";
-    highscoreInitialsReturn.innerHTML = returnInitials;
-    highscoreScoreReturn.innerHTML = returnScores;
+}
+
+function viewingHighScores() {
+    mainHeader.innerHTML = "High scores";
+    hsSubmissionArea.style.display = "none";
+    mainParagraph.style.display = "none";
+    rightOrWrong.innerHTML = "";
+    goBackButton.style.display = "inline";
+    clearScoresButton.style.display = "inline";
+    highscores.style.display = "flex";
+    quizStartButton.style.display = "none";
+    answerSection.style.display = "none";
+    clearInterval(countdownTimer);
+    timer.innerHTML = "";
+
+    let storedUserData = localStorage.getItem('scores');
+    let stringUserData = JSON.parse(storedUserData);
+    let highscoreReturn = Object.entries(stringUserData);
+
+    for (const [initials, scores] of highscoreReturn) {
+        const initial = document.createElement("h5");
+        const initialNode = document.createTextNode(initials);
+        initial.appendChild(initialNode);
+        highscoreInitialsReturn.appendChild(initial);
+
+        const score = document.createElement("h5");
+        const scoreNode = document.createTextNode(scores);
+        score.appendChild(scoreNode);
+        highscoreScoreReturn.appendChild(score);
+    }
 }
 
 highscoreButton.addEventListener("click", submitHighscore)
@@ -282,6 +333,7 @@ goBackButton.addEventListener("click", function() {
 });
 clearScoresButton.addEventListener("click", function() {
     localStorage.clear();
-    highscoreInitialsReturn.innerHTML = returnInitials;
-    highscoreScoreReturn.innerHTML = returnScores;
-})
+    highscoreInitialsReturn.innerHTML = "";
+    highscoreScoreReturn.innerHTML = "";
+});
+viewHighScores.addEventListener("click", viewingHighScores);
